@@ -59,7 +59,7 @@ if __name__ == '__main__':
 	parser.add_argument('--gpu', type=int, default=0, help='gpu id')
 
 	# dataset
-	parser.add_argument('--data_path', type=str, default='Data sets/')
+	parser.add_argument('--data_path', type=str, default='datasets/')
 	parser.add_argument('--dataset', type=str, default='CiteULike')
 	parser.add_argument('--seed', type=int, default=0, help='dataset seed')
 	
