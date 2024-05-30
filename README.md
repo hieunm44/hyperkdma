@@ -4,34 +4,49 @@
 </div>
 
 ## Overview
-This is the implementation for our paper [HyperKDMA: Distilling Recommender Systems via Hypernetwork-based Teacher Assistants](HyperKDMA.pdf). In this work, we propose HyperKDMA, a distillation scheme using multiple hypernetwork-based teacher assistants to bridge the teacher-student gap in knowledge distillation for top-K recommendation. We verify the effectiveness of our method through experiments using three base models: [BPR](https://dl.acm.org/doi/10.5555/1795114.1795167), [NeuMF](https://doi.org/10.1145/3038912.3052569) and [LightGCN](https://doi.org/10.1145/3397271.3401063); and two public data sets: [CiteULike](https://https://github.com/js05212/citeulike-t) and [Foursquare](https://https://sites.google.com/site/yangdingqi/home/foursquare-dataset).
+This is the implementation for our paper [HyperKDMA: Distilling Recommender Systems via Hypernetwork-based Teacher Assistants](HyperKDMA.pdf). In this work, we propose HyperKDMA, a distillation scheme using multiple hypernetwork-based teacher assistants to bridge the teacher-student gap in knowledge distillation for top-K recommendation. We verify the effectiveness of our method through experiments using three base models: [BPR](https://dl.acm.org/doi/10.5555/1795114.1795167), [NeuMF](https://doi.org/10.1145/3038912.3052569) and [LightGCN](https://doi.org/10.1145/3397271.3401063); and two public data sets: [CiteULike](https://github.com/js05212/citeulike-t) and [Foursquare](https://sites.google.com/site/yangdingqi/home/foursquare-dataset).
+
+## Built With
+<div align="center">
+    <a href="https://numpy.org/">
+    <img src="https://numpy.org/images/logo.svg" height=40 hspace=10/>
+    </a>
+    <a href="https://pytorch.org/">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/PyTorch_logo_black.svg" height=40/>
+    </a>
+</div>
 
 ## Usage
-1. Generate datasets
+1. Clone the repo
+   ```sh
+   git clone https://github.com/hieunm44/hyperkdma.git
+   cd hyperkdma
+   ```
+2. Generate datasets
    ```sh
    python3 gen_dataset_seed.py
    ```
    Then dataset files will be generated in the folder `datasets`.
-2. Train a teacher model
+3. Train a teacher model
    ```sh
    python3 main_no_KD --model BPR --dim 200 --dataset CiteULike 
    ```
-3. Now you have different ways to train a student model, for example:
-   * Train a student model without KD
-      ```sh
-      python3 main_no_KD --model BPR --dim 20 --dataset CiteULike 
-      ```
-   * Train a student model with KD using DE
-     ```sh
-     python3 main_DE --model BPR --teacher_dim 200 --student_dim 20 --dataset CiteULike
-     ```
-   * Train a student model with KD using HyperKDMA-DE 
-     ```sh
-     python3 main_DETA --model BPR --teacher_dim 200 --student_dim 20 --num_TAs 8 --dataset CiteULike
-     ```
-
+4. Now you have different ways to train a student model, for example:
+* Train a student model without KD
+  ```sh
+  python3 main_no_KD --model BPR --dim 20 --dataset CiteULike 
+  ```
+* Train a student model with KD using DE
+  ```sh
+  python3 main_DE --model BPR --teacher_dim 200 --student_dim 20 --dataset CiteULike
+  ```
+* Train a student model with KD using HyperKDMA-DE 
+  ```sh
+  python3 main_DETA --model BPR --teacher_dim 200 --student_dim 20 --num_TAs 8 --dataset CiteULike
+  ```
+ 
 ## Results
 We compare our model with the following competitors: [Distillation Experts (DE)](https://doi.org/10.1145/3340531.3412005), [Personalized Hint Regression (PHR)](https://doi.org/10.1016/j.knosys.2021.107958), [Knowledge Distillation via Teacher Assistant(TAKD)](https://doi.org/10.1609/aaai.v34i04.5963), and [Densely Guided Knowledge Distillation (DGKD)](https://doi.org/10.1109/ICCV48922.2021.00926). Our model HyperKDMA significantly outperforms other KD methods thanks to the personalized learning mechanism.
 <div align="center">
-<img src="results.png" with=100%"/>
+<img src="results.png" width=100%"/>
 </div>
